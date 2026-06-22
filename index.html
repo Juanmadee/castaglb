@@ -167,19 +167,21 @@ Cargando productos...
 <div class="brands-row reveal reveal-delay-1">
 <span class=brand-item>Supreme</span>
 <span class=brand-item>The North Face</span>
-<span class=brand-item>Corteiz</span>
+<span class=brand-item>Off-White</span>
 <span class=brand-item>Trapstar</span>
-<span class=brand-item>Carhartt WIP</span>
+<span class=brand-item>Balenciaga</span>
 <span class=brand-item>New Era</span>
 <span class=brand-item>Seiko</span>
 <span class=brand-item>Casio</span>
-<span class=brand-item>Lacoste</span>
 <span class=brand-item>Adidas Originals</span>
+<span class=brand-item>Y mucho mas...</span>
 </div>
 </section>
 <section id=about>
 <div class="about-visual reveal">
-<div class=about-img-main></div>
+<div class=about-img-main>
+<img src=https://res.cloudinary.com/dp8qpqog1/image/upload/v1782150070/brock-wegner---kRNR2G888-unsplash_krtxfm.jpg alt="CASTA GLB" style=width:100%;height:100%;object-fit:cover;position:absolute;inset:0>
+</div>
 <div class=about-border></div>
 <div class=about-stat>
 <div class=about-stat-number>500+</div>
@@ -207,7 +209,7 @@ Importacion directa. Stock real. Precios justos. Desde Paysandu para todo el pai
 <div class="pillar reveal reveal-delay-2">
 <div class=pillar-icon><i class="fa-solid fa-truck-fast"></i></div>
 <h4 class=pillar-title>Envio nacional</h4>
-<p class=pillar-desc>Despachamos a todo el pais via Correo y OCA.</p>
+<p class=pillar-desc>Despachamos a todo el pais por la agencia que prefieras.</p>
 </div>
 <div class="pillar reveal reveal-delay-3">
 <div class=pillar-icon><i class="fa-solid fa-headset"></i></div>
@@ -297,10 +299,8 @@ ofertas exclusivas y preventa de productos limitados.
 <a href=# class=nav-logo>CASTA <span class=gold>GLB</span></a>
 <p>Ropa de marca, accesorios y relojes premium. Importacion directa, 100% originales. Del mundo a tu puerta.</p>
 <div class=footer-social>
-<a href=# class=social-link aria-label=Instagram><i class="fa-brands fa-instagram"></i></a>
-<a href=# class=social-link aria-label=WhatsApp><i class="fa-brands fa-whatsapp"></i></a>
-<a href=# class=social-link aria-label=TikTok><i class="fa-brands fa-tiktok"></i></a>
-<a href=# class=social-link aria-label=Facebook><i class="fa-brands fa-facebook-f"></i></a>
+<a href=https://www.instagram.com/castaglobal/ class=social-link aria-label=Instagram><i class="fa-brands fa-instagram"></i></a>
+<a href="https://wa.me/59892380515?text=Hola%2C%20quiero%20encargar..." class=social-link aria-label=WhatsApp><i class="fa-brands fa-whatsapp"></i></a>
 </div>
 </div>
 <div class=footer-col>
@@ -327,7 +327,7 @@ ofertas exclusivas y preventa de productos limitados.
 <h4>Contacto</h4>
 <ul class=footer-contact>
 <li><i class="fa-brands fa-whatsapp"></i> +598 92 380 515</li>
-<li><i class="fa-brands fa-instagram"></i> @castaglb</li>
+<li><i class="fa-brands fa-instagram"></i> @castaglobal</li>
 <li><i class="fa-solid fa-location-dot"></i> Paysandu, Uruguay</li>
 <li><i class="fa-regular fa-clock"></i> Lun–Sab 10–20hs</li>
 </ul>
@@ -478,8 +478,11 @@ ofertas exclusivas y preventa de productos limitados.
 </select>
 </div>
 <div class="admin-field form-grid-full">
-<label>URL de imagen</label>
-<input type=text class=admin-input id=form-img placeholder=https://res.cloudinary.com/...>
+<label>Imágenes (URL Cloudinary)</label>
+<div id=extra-imgs-container>
+<input type=text class="admin-input extra-img-input" placeholder="https://res.cloudinary.com/... (foto principal)">
+</div>
+<button type=button class=admin-btn-secondary id=add-img-btn style=margin-top:0.5rem;font-size:0.75rem>+ Agregar otra foto</button>
 </div>
 <div class="admin-field form-grid-full">
 <label>Descripción corta (opcional)</label>
@@ -496,6 +499,6 @@ ofertas exclusivas y preventa de productos limitados.
 </div>
 </div>
 </div>
-<script src=script.js defer></script>
+<script src=scriptcasta.js defer></script>
 </body>
 </html>
