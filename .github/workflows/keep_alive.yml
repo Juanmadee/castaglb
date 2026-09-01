@@ -12,8 +12,15 @@ jobs:
     steps:
       - name: Hacer consulta a Supabase
         run: |
-          curl --fail -s -X GET "${{ secrets.SUPABASE_URL }}/rest/v1/" \
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" -X GET "${{ secrets.SUPABASE_URL }}/rest/v1/" \
             -H "apikey: ${{ secrets.SUPABASE_ANON_KEY }}" \
-            -H "Authorization: Bearer ${{ secrets.SUPABASE_ANON_KEY }}" \
-            > /dev/null
-          echo "Ping realizado con éxito a Supabase"
+            -H "Authorization: Bearer ${{ secrets.SUPABASE_ANON_KEY }}")
+          
+          echo "Supabase devolvió el código HTTP: $STATUS"
+          
+          if [ "$STATUS" -eq 200 ] || [ "$STATUS" -eq 300 ]; then
+            echo "Conexión exitosa a la base de datos."
+          else
+            echo "Error en la consulta HTTP $STATUS"
+            exit 1
+          fi
