@@ -16,7 +16,8 @@ jobs:
           KEY: ${{ secrets.SUPABASE_ANON_KEY }}
         run: |
           # Limpiamos la URL por si termina en '/'
-          CLEAN_URL=$(echo "${URL}" | sed 's/*$//')
+          CLEAN_URL="${URL%/}"
+          echo "URL limpia: ${CLEAN_URL}"
           
           # Hacemos la consulta al Schema OpenAPI de PostgREST
           STATUS=$(curl -s -o /dev/null -w "%{http_code}" -X GET "${CLEAN_URL}/rest/v1/?apikey=${KEY}")
