@@ -2,25 +2,31 @@ name: Mantener Supabase Activo
 
 on:
   schedule:
-    # Se ejecuta todos los días a las 05:00 AM UTC y 17:00 PM UTC
+    # Se ejecuta todos los días a las 05:00 AM y 17:00 PM UTC
     - cron: '0 5,17 * * *'
-  workflow_dispatch: # Permite probarlo manualmente cuando quieras
+  workflow_dispatch: # Permite probarlo manualmente
 
 jobs:
   ping_supabase:
     runs-on: ubuntu-latest
     steps:
       - name: Hacer consulta a Supabase
+        env:
+          URL: ${{ secrets.SUPABASE_URL }}
+          KEY: ${{ secrets.SUPABASE_ANON_KEY }}
         run: |
-          STATUS=$(curl -s -o /dev/null -w "%{http_code}" -X GET "${{ secrets.SUPABASE_URL }}/rest/v1/" \
-            -H "apikey: ${{ secrets.SUPABASE_ANON_KEY }}" \
-            -H "Authorization: Bearer ${{ secrets.SUPABASE_ANON_KEY }}")
+          # Limpiamos la URL por si termina en '/'
+          CLEAN_URL=$(echo "${URL}" | sed 's/*$//')
           
-          echo "Supabase devolvió el código HTTP: $STATUS"
+          # Hacemos la consulta al Schema OpenAPI de PostgREST
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" -X GET "${CLEAN_URL}/rest/v1/?apikey=${KEY}")
           
-          if [ "$STATUS" -eq 200 ] || [ "$STATUS" -eq 300 ]; then
-            echo "Conexión exitosa a la base de datos."
+          echo "Supabase respondió con el código HTTP: $STATUS"
+          
+          if [ "$STATUS" -ge 200 ] && [ "$STATUS" -lt 400 ]; then
+            echo "Conexión exitosa. La base de datos sigue activa."
           else
-            echo "Error en la consulta HTTP $STATUS"
+            echo "Error: La API devolvió el código $STATUS."
+            echo "Revisa que SUPABASE_URL y SUPABASE_ANON_KEY estén bien cargados en los Secrets de GitHub."
             exit 1
           fi
