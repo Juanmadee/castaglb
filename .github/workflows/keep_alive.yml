@@ -20,7 +20,9 @@ jobs:
           echo "URL limpia: ${CLEAN_URL}"
           
           # Hacemos la consulta al Schema OpenAPI de PostgREST
-          STATUS=$(curl -s -o /dev/null -w "%{http_code}" -X GET "${CLEAN_URL}/rest/v1/?apikey=${KEY}")
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" -X GET "${CLEAN_URL}/rest/v1/" \
+          -H "apikey: ${KEY}" \
+          -H "Authorization: Bearer ${KEY}")
           
           echo "Supabase respondió con el código HTTP: $STATUS"
           
